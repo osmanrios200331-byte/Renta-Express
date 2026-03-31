@@ -4,6 +4,7 @@
   --color-enlace-activo: rgba(255, 255, 255, 0.1);
 }
 
+
 /* Estructura principal */
 .sidebar {
   background-color: var(--color-fondo-primario);
