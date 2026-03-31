@@ -9,6 +9,7 @@ function verificarSesion(req, res, next) {
     next();
 }
 
+
 // Ruta inicio admin
 router.get('/inicioAdmin', verificarSesion, function(req, res) {
     res.render('inicioAdmin', {

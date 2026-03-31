@@ -17,6 +17,7 @@
         }
     }
 
+    
     document.getElementById('fechaInicio').addEventListener('change', calcularTotal);
     document.getElementById('fechaFin').addEventListener('change', calcularTotal);
     document.getElementById('tarifaAplicada').addEventListener('input', calcularTotal);

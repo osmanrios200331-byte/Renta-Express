@@ -7,6 +7,7 @@ function verificarSesion(req, res, next) {
     next();
 }
 
+
 // ================= GET - Ver todas las rentas =================
 router.get('/', verificarSesion, (req, res) => {
     res.render('rentas', {

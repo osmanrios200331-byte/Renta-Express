@@ -4,6 +4,7 @@
       const modal = bootstrap.Modal.getInstance(document.getElementById('modalPagoBasica'));
       modal.hide();
 
+      
       // Simular procesamiento
       Swal.fire({
         title: 'Procesando pago...',

@@ -3,6 +3,7 @@ const menuToggle = document.getElementById("menuToggle");
 const sidebar = document.querySelector(".sidebar");
 const overlay = document.getElementById("overlay");
 
+
 if (menuToggle && sidebar && overlay) {
     menuToggle.addEventListener("click", () => {
         sidebar.classList.toggle("show");

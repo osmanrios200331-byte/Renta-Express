@@ -3,6 +3,7 @@ function abrirModalPago(){
     modal.show();
 }
 
+
 const form = document.getElementById("formPago");
 const tabla = document.getElementById("tablaPagos");
 const totalSpan = document.getElementById("totalRecaudo");

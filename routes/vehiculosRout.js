@@ -6,6 +6,7 @@ function verificarSesion(req, res, next) {
     next();
 }
 
+
 router.get('/', verificarSesion, (req, res) => {
     res.render('vehiculos', {
         user: req.session.user,

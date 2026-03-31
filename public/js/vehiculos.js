@@ -4,6 +4,7 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
             method: "POST"
         });
 
+        
         // redirigir al login
         window.location.href = "/";
 

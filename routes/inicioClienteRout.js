@@ -5,4 +5,5 @@ router.get('/inicioCliente', function(req, res) {
     res.render('inicioCliente');// Renderiza la vista EJS llamada inicioCliente.ejs
 });
 
+
 module.exports = router;

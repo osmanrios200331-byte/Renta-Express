@@ -1,6 +1,7 @@
 // 🔥 URL base de tu API
 const API = "http://localhost:3000/clientes";
 
+
 let editandoId = null;
 let clientesGlobal = []; // 🔥 guardamos los datos aquí
 
