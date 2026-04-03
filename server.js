@@ -92,11 +92,17 @@ app.get('/pagos', verificarSesion, soloAdmin, (req, res) => {
 app.get('/reportes', verificarSesion, soloAdmin, (req, res) => {
     res.render('reportes', { user: req.session.user });
 });
+
+const apiRoutes = require('./routes/api');
+app.use('/api', apiRoutes);
+
+
 // ================= RUTAS CLIENTE =================
 app.get('/InicioCliente', verificarSesion, (req, res) => {
     res.render('InicioCliente', { user: req.session.user });
 }
 );
+
 
 // ================= RUTAS GENERALES =================
 app.get('/perfil', verificarSesion, (req, res) => {
