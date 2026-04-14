@@ -1,17 +1,16 @@
-// 🔥 URL base de tu API
-const API = "http://localhost:3000/clientes";
-
+// 🔥 URL correcta de la API
+const API = "http://localhost:3000/api/clientes";
 
 let editandoId = null;
-let clientesGlobal = []; // 🔥 guardamos los datos aquí
+let clientesGlobal = [];
 
-// 📌 Obtener y mostrar clientes
+// ================= OBTENER CLIENTES =================
 async function obtenerClientes() {
     try {
         const res = await fetch(API);
         const data = await res.json();
 
-        clientesGlobal = data; // 🔥 guardamos en memoria
+        clientesGlobal = data;
         renderClientes(clientesGlobal);
 
     } catch (error) {
@@ -19,7 +18,7 @@ async function obtenerClientes() {
     }
 }
 
-// 📌 Renderizar clientes en la tabla
+// ================= RENDERIZAR =================
 function renderClientes(lista) {
     const tabla = document.getElementById("tablaClientes");
     tabla.innerHTML = "";
@@ -27,13 +26,13 @@ function renderClientes(lista) {
     lista.forEach(c => {
         tabla.innerHTML += `
             <tr>
-                <td>${c.tipo_doc}</td>
-                <td>${c.documento}</td>
-                <td>${c.nombre}</td>
-                <td>${c.telefono}</td>
-                <td>${c.email}</td>
-                <td>${c.licencia}</td>
-                <td>${c.fecha}</td>
+                <td>${c.tipo_doc || ''}</td>
+                <td>${c.documento || ''}</td>
+                <td>${c.nombre || ''}</td>
+                <td>${c.telefono || ''}</td>
+                <td>${c.email || ''}</td>
+                <td>${c.licencia || ''}</td>
+                <td>${c.fechaRegistro || ''}</td>
                 <td>
                     <button class="btn btn-sm btn-primary" onclick="editar(${c.id})">✏️</button>
                     <button class="btn btn-sm btn-danger" onclick="eliminar(${c.id})">🗑️</button>
@@ -43,7 +42,7 @@ function renderClientes(lista) {
     });
 }
 
-// 📌 Abrir modal
+// ================= ABRIR MODAL =================
 function abrirModal() {
     editandoId = null;
     document.getElementById("formCliente").reset();
@@ -52,7 +51,7 @@ function abrirModal() {
     modal.show();
 }
 
-// 📌 Editar cliente
+// ================= EDITAR =================
 async function editar(id) {
     try {
         const res = await fetch(`${API}/${id}`);
@@ -62,13 +61,13 @@ async function editar(id) {
 
         const form = document.getElementById("formCliente");
 
-        form.tipo_doc.value = c.tipo_doc;
-        form.documento.value = c.documento;
-        form.nombre.value = c.nombre;
-        form.telefono.value = c.telefono;
-        form.email.value = c.email;
-        form.licencia.value = c.licencia;
-        form.fecha.value = c.fecha;
+        form.tipo_doc.value = c.tipo_doc || '';
+        form.documento.value = c.documento || '';
+        form.nombre.value = c.nombre || '';
+        form.telefono.value = c.telefono || '';
+        form.email.value = c.email || '';
+        form.licencia.value = c.licencia || '';
+        form.fecha.value = c.fechaRegistro ? c.fechaRegistro.split(',')[0] : '';
 
         const modal = new bootstrap.Modal(document.getElementById("modalCliente"));
         modal.show();
@@ -78,7 +77,7 @@ async function editar(id) {
     }
 }
 
-// 📌 Guardar cliente
+// ================= GUARDAR =================
 document.addEventListener("submit", async function (e) {
     if (e.target.id === "formCliente") {
         e.preventDefault();
@@ -113,7 +112,7 @@ document.addEventListener("submit", async function (e) {
     }
 });
 
-// 📌 Eliminar cliente
+// ================= ELIMINAR =================
 async function eliminar(id) {
     try {
         const confirmar = confirm("¿Eliminar cliente?");
@@ -130,7 +129,7 @@ async function eliminar(id) {
     }
 }
 
-// 📌 BUSCADOR CORRECTO 🔥
+// ================= BUSCADOR =================
 function activarBuscador() {
     const buscador = document.getElementById("buscador");
 
@@ -138,15 +137,15 @@ function activarBuscador() {
         const valor = this.value.toLowerCase();
 
         const filtrados = clientesGlobal.filter(c =>
-            c.nombre.toLowerCase().includes(valor) ||
-            c.documento.toLowerCase().includes(valor)
+            (c.nombre || '').toLowerCase().includes(valor) ||
+            (c.documento || '').toLowerCase().includes(valor)
         );
 
         renderClientes(filtrados);
     });
 }
 
-// 🚀 Inicializar
+// ================= INICIAR =================
 document.addEventListener("DOMContentLoaded", () => {
     obtenerClientes();
     activarBuscador();
