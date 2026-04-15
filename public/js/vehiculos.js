@@ -178,7 +178,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // EXPOSE GLOBAL
 
+window.editar = editar;
 window.eliminar = eliminar;
-window.editar = function(id) {
-    console.log("CLICK EDITAR:", id);
-};
