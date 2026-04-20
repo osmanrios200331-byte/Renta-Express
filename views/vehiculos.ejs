@@ -5,21 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vehículos</title>
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <!-- Bootstrap LOCAL -->
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-    <!-- Icons LOCAL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Icons -->
     <link rel="stylesheet" href="/css/bootstrap-icons.css">
 
     <!-- CSS propio -->
     <link rel="stylesheet" href="/css/stylesVehiculo.css">
     <link rel="stylesheet" href="/css/stylesadmin.css">
+    <link rel="stylesheet" href="/css/stylesinicio.css">
 </head>
 
 <body>
 
-    
 <div class="main-container">
 
     <!-- SIDEBAR -->
@@ -29,12 +31,12 @@
         </div>
 
         <nav>
-            <a href="/inicioAdmin" class="nav-item active"><i class="bi bi-house-door"></i> Inicio</a>
-                <a href="/clientes" class="nav-item"><i class="bi bi-people"></i> Clientes</a>
-                <a href="/vehiculos" class="nav-item"><i class="bi bi-truck"></i> Vehículos</a>
-                <a href="/rentas" class="nav-item"><i class="bi bi-file-earmark-text"></i> Rentas</a>
-                <a href="/pagos" class="nav-item"><i class="bi bi-coin"></i> Pagos</a>
-                <a href="/reportes" class="nav-item"> <i class="bi bi-file-earmark-bar-graph"></i> Reportes</a>
+            <a href="/inicioAdmin" class="nav-item "><i class="bi bi-house-door"></i> Inicio</a>
+            <a href="/clientes" class="nav-item"><i class="bi bi-people"></i> Clientes</a>
+            <a href="/vehiculos" class="nav-item active"><i class="bi bi-truck"></i> Vehículos</a>
+            <a href="/rentas" class="nav-item"><i class="bi bi-file-earmark-text"></i> Rentas</a>
+            <a href="/pagos" class="nav-item"><i class="bi bi-coin"></i> Pagos</a>
+            <a href="/reportes" class="nav-item"><i class="bi bi-file-earmark-bar-graph"></i> Reportes</a>
         </nav>
     </aside>
 
@@ -66,38 +68,39 @@
                     <p>Administra y controla la flota de vehículos.</p>
                 </div>
 
-                <!-- BOTON ABRE MODAL -->
                 <button class="btn btn-warning fw-bold" data-bs-toggle="modal" data-bs-target="#modalNuevoVehiculo">
                     + Nuevo Vehículo
                 </button>
             </div>
 
-            <!-- TARJETAS -->
+            <!-- TARJETAS (CORREGIDAS) -->
             <div class="cards-vehiculos mb-3">
+
                 <div class="card-box total">
-                    <h3>22</h3>
+                    <h3 id="totalVehiculos">0</h3>
                     <p>Vehículos</p>
                 </div>
 
                 <div class="card-box disponible">
-                    <h3>12</h3>
+                    <h3 id="vehiculosDisponibles">0</h3>
                     <p>Disponibles</p>
                 </div>
 
                 <div class="card-box rentado">
-                    <h3>5</h3>
+                    <h3 id="vehiculosRentados">0</h3>
                     <p>Rentados</p>
                 </div>
 
                 <div class="card-box mantenimiento">
-                    <h3>5</h3>
+                    <h3 id="vehiculosMantenimiento">0</h3>
                     <p>Mantenimiento</p>
                 </div>
 
                 <div class="card-box inactivo">
-                    <h3>0</h3>
+                    <h3 id="vehiculosInactivos">0</h3>
                     <p>Inactivos</p>
                 </div>
+
             </div>
 
             <!-- BUSCADOR -->
@@ -151,7 +154,7 @@
 <!-- OVERLAY -->
 <div id="overlay" class="overlay"></div>
 
-<!-- ===== MODAL NUEVO VEHÍCULO ===== -->
+<!-- MODAL -->
 <div class="modal fade" id="modalNuevoVehiculo" tabindex="-1">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
@@ -260,12 +263,6 @@
 
     </div>
   </div>
-</div>
-
-            
-
-        </div>
-    </div>
 </div>
 
 <!-- JS -->

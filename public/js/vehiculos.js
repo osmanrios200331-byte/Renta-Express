@@ -51,8 +51,6 @@ function renderVehiculos(lista) {
 // ================= EDITAR =================
 async function editar(id) {
     try {
-        console.log("Editando ID:", id);
-
         const res = await fetch(`${API}/${id}`);
         if (!res.ok) throw new Error("Vehículo no encontrado");
 
@@ -73,10 +71,10 @@ async function editar(id) {
         form.tarifaDiaria.value = v.tarifaDiaria || '';
         form.estado.value = v.estado || '';
 
-        // FIX input date
+        // ✅ mantener fecha existente
         form.fechaRegistro.value = v.fechaRegistro
             ? v.fechaRegistro.split("T")[0]
-            : '';
+            : obtenerFechaHoy();
 
         bootstrap.Modal.getOrCreateInstance(
             document.getElementById("modalNuevoVehiculo")
@@ -87,18 +85,35 @@ async function editar(id) {
     }
 }
 
+// ================= FECHA AUTOMATICA AL ABRIR =================
+document.getElementById("modalNuevoVehiculo")
+.addEventListener("show.bs.modal", function () {
+
+    // 👉 solo cuando es nuevo
+    if (!editandoId) {
+        document.getElementById("formVehiculo").fechaRegistro.value = obtenerFechaHoy();
+    }
+});
+
 // ================= LIMPIAR MODAL =================
-document.getElementById("modalNuevoVehiculo").addEventListener("hidden.bs.modal", function () {
+document.getElementById("modalNuevoVehiculo")
+.addEventListener("hidden.bs.modal", function () {
     document.getElementById("formVehiculo").reset();
     editandoId = null;
 });
 
-// ================= GUARDAR (CREAR / EDITAR) =================
-document.getElementById("formVehiculo").addEventListener("submit", async function (e) {
+// ================= GUARDAR =================
+document.getElementById("formVehiculo")
+.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const form = new FormData(e.target);
     const datos = Object.fromEntries(form.entries());
+
+    // 🔥 SOLO si es nuevo, poner fecha automática
+    if (!editandoId) {
+        datos.fechaRegistro = obtenerFechaHoy();
+    }
 
     try {
         if (editandoId) {
@@ -154,14 +169,30 @@ function activarBuscador() {
     });
 }
 
+// ================= NORMALIZAR ESTADO =================
+function normalizarEstado(estado) {
+    return (estado || '').toLowerCase().trim();
+}
+
 // ================= CONTADORES =================
 function actualizarContadores() {
     const total = vehiculosGlobal.length;
 
-    const disponibles = vehiculosGlobal.filter(v => v.estado === "Disponible").length;
-    const rentados = vehiculosGlobal.filter(v => v.estado === "Rentado").length;
-    const mantenimiento = vehiculosGlobal.filter(v => v.estado === "Mantenimiento").length;
-    const inactivos = vehiculosGlobal.filter(v => v.estado === "Inactivo").length;
+    const disponibles = vehiculosGlobal.filter(v => 
+        normalizarEstado(v.estado) === "disponible"
+    ).length;
+
+    const rentados = vehiculosGlobal.filter(v => 
+        normalizarEstado(v.estado) === "rentado"
+    ).length;
+
+    const mantenimiento = vehiculosGlobal.filter(v => 
+        normalizarEstado(v.estado) === "mantenimiento"
+    ).length;
+
+    const inactivos = vehiculosGlobal.filter(v => 
+        normalizarEstado(v.estado) === "inactivo"
+    ).length;
 
     document.getElementById("totalVehiculos").innerText = total;
     document.getElementById("vehiculosDisponibles").innerText = disponibles;
@@ -170,13 +201,18 @@ function actualizarContadores() {
     document.getElementById("vehiculosInactivos").innerText = inactivos;
 }
 
+// ================= FECHA HOY =================
+function obtenerFechaHoy() {
+    const hoy = new Date();
+    return hoy.toISOString().split("T")[0];
+}
+
 // ================= INICIO =================
 document.addEventListener("DOMContentLoaded", () => {
     obtenerVehiculos();
     activarBuscador();
 });
 
-// EXPOSE GLOBAL
-
+// ================= GLOBAL =================
 window.editar = editar;
 window.eliminar = eliminar;

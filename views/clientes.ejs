@@ -11,6 +11,7 @@
 
     <!-- CSS propio -->
     <link rel="stylesheet" href="/css/stylesadmin.css">
+        <link rel="stylesheet" href="/css/stylesinicio.css">
 </head>
 
 <body>
@@ -26,12 +27,12 @@
         </div>
 
         <nav>
-            <a href="/inicioAdmin" class="nav-item active"><i class="bi bi-house-door"></i> Inicio</a>
-                <a href="/clientes" class="nav-item" ><i class="bi bi-people"></i>  Clientes</a>
-                <a href="/vehiculos" class="nav-item"><i class="bi bi-truck"></i> Vehículos</a>
-                <a href="/rentas" class="nav-item"><i class="bi bi-file-earmark-text"></i> Rentas</a>
-                <a href="/pagos" class="nav-item"><i class="bi bi-coin"></i> Pagos</a>
-                <a href="/reportes" class="nav-item"> <i class="bi bi-file-earmark-bar-graph"></i> Reportes</a>
+            <a href="/inicioAdmin" class="nav-item "><i class="bi bi-house-door"></i> Inicio</a>
+                <a href="/clientes" class="nav-item active" ><i class="bi bi-people"></i>  Clientes</a>
+                <a href="/vehiculos" class="nav-item "><i class="bi bi-truck"></i> Vehículos</a>
+                <a href="/rentas" class="nav-item "><i class="bi bi-file-earmark-text"></i> Rentas</a>
+                <a href="/pagos" class="nav-item "><i class="bi bi-coin"></i> Pagos</a>
+                <a href="/reportes" class="nav-item "> <i class="bi bi-file-earmark-bar-graph"></i> Reportes</a>
         </nav>
 
     </aside>
@@ -149,10 +150,10 @@
             <input type="text" class="form-control" name="nombre" required>
           </div>
 
-          <div class="col-md-6 mb-2">
-            <label>Fecha Registro</label>
-            <input type="date" class="form-control" name="fecha" required>
-          </div>
+         <div class="col-md-6 mb-2">
+    <label>Fecha Registro</label>
+    <input type="date" class="form-control" name="fechaRegistro" id="fechaRegistro" required>
+</div>
 
           <div class="col-md-6 mb-2">
             <label>Teléfono</label>

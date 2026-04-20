@@ -32,7 +32,7 @@ function renderClientes(lista) {
                 <td>${c.telefono || ''}</td>
                 <td>${c.email || ''}</td>
                 <td>${c.licencia || ''}</td>
-                <td>${c.fechaRegistro || ''}</td>
+                <td>${c.fechaRegistro ? new Date(c.fechaRegistro).toLocaleDateString() : ''}</td>
                 <td>
                     <button class="btn btn-sm btn-primary" onclick="editar(${c.id})">✏️</button>
                     <button class="btn btn-sm btn-danger" onclick="eliminar(${c.id})">🗑️</button>
@@ -45,7 +45,13 @@ function renderClientes(lista) {
 // ================= ABRIR MODAL =================
 function abrirModal() {
     editandoId = null;
-    document.getElementById("formCliente").reset();
+
+    const form = document.getElementById("formCliente");
+    form.reset();
+
+    // 🔥 FECHA AUTOMÁTICA HOY
+    const hoy = new Date().toISOString().split("T")[0];
+    form.fechaRegistro.value = hoy;
 
     const modal = new bootstrap.Modal(document.getElementById("modalCliente"));
     modal.show();
@@ -67,7 +73,11 @@ async function editar(id) {
         form.telefono.value = c.telefono || '';
         form.email.value = c.email || '';
         form.licencia.value = c.licencia || '';
-        form.fecha.value = c.fechaRegistro ? c.fechaRegistro.split(',')[0] : '';
+
+        // 🔥 FECHA CORRECTA
+        form.fechaRegistro.value = c.fechaRegistro
+            ? c.fechaRegistro.split("T")[0]
+            : '';
 
         const modal = new bootstrap.Modal(document.getElementById("modalCliente"));
         modal.show();
@@ -85,6 +95,11 @@ document.addEventListener("submit", async function (e) {
         const form = new FormData(e.target);
         const datos = Object.fromEntries(form.entries());
 
+        // 🔥 SI NO HAY FECHA → PONER HOY
+        if (!datos.fechaRegistro) {
+            datos.fechaRegistro = new Date().toISOString().split("T")[0];
+        }
+
         try {
             if (editandoId) {
                 await fetch(`${API}/${editandoId}`, {
@@ -100,11 +115,19 @@ document.addEventListener("submit", async function (e) {
                 });
             }
 
-            const modal = bootstrap.Modal.getInstance(document.getElementById("modalCliente"));
+            const modal = bootstrap.Modal.getInstance(
+                document.getElementById("modalCliente")
+            );
             modal.hide();
 
             e.target.reset();
-            obtenerClientes();
+
+            // 🔥 REDIRECCIÓN SOLO SI ES NUEVO
+            if (!editandoId) {
+                window.location.href = "/rentas";
+            } else {
+                obtenerClientes();
+            }
 
         } catch (error) {
             console.error("Error al guardar:", error);
@@ -150,3 +173,8 @@ document.addEventListener("DOMContentLoaded", () => {
     obtenerClientes();
     activarBuscador();
 });
+
+// ================= GLOBAL =================
+window.editar = editar;
+window.eliminar = eliminar;
+window.abrirModal = abrirModal;

@@ -9,9 +9,11 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-icons.css">
+
     
     <!-- Tus estilos -->
     <link rel="stylesheet" href="/css/stylesadmin.css">
+    <link rel="stylesheet" href="/css/stylesinicio.css">
 
 
 </head>
@@ -28,10 +30,10 @@
             </div>
 
             <nav>
-                <a href="/inicioAdmin" class="nav-item active"><i class="bi bi-house-door"></i> Inicio</a>
+                <a href="/inicioAdmin" class="nav-item "><i class="bi bi-house-door"></i> Inicio</a>
                 <a href="/clientes" class="nav-item"><i class="bi bi-people"></i> Clientes</a>
                 <a href="/vehiculos" class="nav-item"><i class="bi bi-truck"></i> Vehículos</a>
-                <a href="/rentas" class="nav-item"><i class="bi bi-file-earmark-text"></i> Rentas</a>
+                <a href="/rentas" class="nav-item active"><i class="bi bi-file-earmark-text"></i> Rentas</a>
                 <a href="/pagos" class="nav-item"><i class="bi bi-coin"></i> Pagos</a>
                 <a href="/reportes" class="nav-item"> <i class="bi bi-file-earmark-bar-graph"></i> Reportes</a>
             </nav>
@@ -136,56 +138,66 @@
 
     <!-- MODAL -->
     <div class="modal fade" id="modalNuevaRenta" tabindex="-1">
-        <div class="modal-dialog modal-md modal-dialog-centered">
-            <div class="modal-content p-3">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content p-3">
 
-                <h5 class="text-center fw-bold mb-4">Detalles Renta</h5>
+            <h5 class="text-center fw-bold mb-4">Detalles Renta</h5>
 
-                <div class="row g-3">
+            <div class="row g-3">
 
-                    <div class="col-md-6">
-                        <label class="form-label">Cliente</label>
-                        <input type="text" class="form-control input-line" id="cliente">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">Fecha Fin</label>
-                        <input type="date" class="form-control input-line" id="fechaFin">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">Vehículo</label>
-                        <input type="text" class="form-control input-line" id="vehiculo">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">Tarifa Aplicada</label>
-                        <input type="number" class="form-control input-line" id="tarifa">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">Fecha Inicio</label>
-                        <input type="date" class="form-control input-line" id="fechaInicio">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">Valor Total</label>
-                        <input type="number" class="form-control input-line" id="total">
-                    </div>
-
+                <!-- CLIENTE -->
+                <div class="col-md-6">
+                    <label class="form-label">Cliente</label>
+                    <select class="form-control" id="cliente">
+                        <option value="">Seleccionar cliente</option>
+                    </select>
                 </div>
 
-                <div class="text-center mt-4">
-                    <button class="btn px-5 fw-bold" style="background:#0b1c3d; color:white; border-radius:10px;"
-                        id="btnGuardarRenta">
-                        Guardar
-                    </button>
+                <!-- FECHA FIN -->
+                <div class="col-md-6">
+                    <label class="form-label">Fecha Fin</label>
+                    <input type="date" class="form-control" id="fechaFin">
+                </div>
+
+                <!-- VEHICULO -->
+                <div class="col-md-6">
+                    <label class="form-label">Vehículo</label>
+                    <select class="form-control" id="vehiculo">
+                        <option value="">Seleccionar vehículo</option>
+                    </select>
+                </div>
+
+                <!-- TARIFA -->
+                <div class="col-md-6">
+                    <label class="form-label">Tarifa Aplicada</label>
+                    <input type="number" class="form-control" id="tarifa">
+                </div>
+
+                <!-- FECHA INICIO -->
+                <div class="col-md-6">
+                    <label class="form-label">Fecha Inicio</label>
+                    <input type="date" class="form-control" id="fechaInicio">
+                </div>
+
+                <!-- TOTAL -->
+                <div class="col-md-6">
+                    <label class="form-label">Valor Total</label>
+                    <input type="number" class="form-control" id="total" readonly>
                 </div>
 
             </div>
+
+            <div class="text-center mt-4">
+                <button class="btn px-5 fw-bold"
+                    style="background:#0b1c3d; color:white; border-radius:10px;"
+                    id="btnGuardarRenta">
+                    Guardar
+                </button>
+            </div>
+
         </div>
     </div>
-
+</div>
     <!-- JS -->
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/menu.js"></script>
